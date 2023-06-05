@@ -1,7 +1,13 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+.idea
+venv
+pychache
 *.py[cod]
 *$py.class
+*.pyc
+.pytest_cache
+
 
 # C extensions
 *.so
