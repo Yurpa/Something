@@ -6,10 +6,10 @@ def load_operations(path):
         return json.load(data)
 
 
-def checkout():
+def checkout(path = '../operations.json'):
     '''Function which gives you the
     list of id of 5 last executed operations'''
-    operations_data = load_operations('../operations.json')
+    operations_data = load_operations(path)
     timelist = []
     checkeddata = []
     doublechecked = []
@@ -26,9 +26,9 @@ def checkout():
     return doublechecked
 
 
-def censored(card1):
+def censored(card1, path = '../operations.json'):
     '''Function which makes card details not visible'''
-    operations_data = load_operations('../operations.json')
+    operations_data = load_operations(path)
     if card1 is None:
         return 'Данные отсутствуют'
     card1 = card1.split()
@@ -43,11 +43,11 @@ def censored(card1):
     return finale_censored
 
 
-def last_struggle():
+def last_struggle(path = '../operations.json'):
     '''Function which prints the details
     about the last 5 operations'''
-    operations_data = load_operations('../operations.json')
-    checked = checkout()
+    operations_data = load_operations(path)
+    checked = checkout(path)
     for item in operations_data:
         if item != {} and item['id'] in checked:
             if item['description'] == "Открытие вклада":
@@ -58,5 +58,5 @@ def last_struggle():
             datetime_str = item['date']
             datetime_obj = datetime.strptime(datetime_str, '%Y-%m-%dT%H:%M:%S.%f')
             print(f"{datetime_obj.date().strftime('%d.%m.%Y')} {item['description']}")
-            print(f"{censored(card1)} ==> {censored(card2)}")
+            print(f"{censored(card1, path)} ==> {censored(card2, path)}")
             print(f"{item['operationAmount']['amount']} {item['operationAmount']['currency']['name']}")
